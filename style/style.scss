@@ -10,10 +10,16 @@ $yellow-active: #F5CB5C;
 $yellow-not-active: #FFB400;
 $blue-active: #00A6ED;
 $blue-not-active: #006BA6;
-$orange: rgba(237,144,23,1);
-$yellow-light: rgba(246,230,180,1);
+$orange: #ED9017;
+$yellow-light: #F6E6B4;
 $black: #1B1B1E;
 $white: #E5E5E5;
+
+// FONTS:
+
+$orbitron-for-digits: 'Orbitron', sans-serif;
+$black-han-for-logo: 'Black Han Sans', sans-serif;
+$open-sans-for-controls: 'Open Sans Condensed', sans-serif;
 
 .body {
   display: flex;
