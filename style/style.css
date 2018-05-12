@@ -168,6 +168,14 @@
   box-sizing: border-box;
   cursor: pointer; }
 
+.controls_section_item_diode {
+  display: block;
+  width: 13px;
+  height: 13px;
+  margin: 0 auto 5px auto;
+  background-color: #1B1B1E;
+  border-radius: 100%; }
+
 .controls_section_item_text {
   display: block;
   font-family: "Open Sans Condensed", sans-serif;

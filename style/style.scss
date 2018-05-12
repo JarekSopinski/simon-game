@@ -184,6 +184,15 @@ $open-sans-for-controls: 'Open Sans Condensed', sans-serif;
   cursor: pointer;
 }
 
+.controls_section_item_diode {
+  display: block;
+  width: 13px;
+  height: 13px;
+  margin: 0 auto 5px auto;
+  background-color: $black;
+  border-radius: 100%;
+}
+
 .controls_section_item_text {
   display: block;
   @include text($open-sans-for-controls, 20px, $black);
