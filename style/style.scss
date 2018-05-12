@@ -1,15 +1,30 @@
+// COLORS:
+
+$green-active: #7FB800;
+$green-not-active: #248232;
+$red-active: #EF233C;
+$red-not-active: #D90429;
+$yellow-active: #F5CB5C;
+$yellow-not-active: #FFB400;
+$blue-active: #00A6ED;
+$blue-not-active: #006BA6;
+$orange: rgba(237,144,23,1);
+$yellow-light: rgba(246,230,180,1);
+$grey: #1B1B1E;
+
 .body {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background: linear-gradient($orange, $yellow-light);
 }
 
 .circle {
   display: block;
   width: 600px;
   height: 600px;
-  background-color: black;
+  background-color: $grey;
   border-radius: 100%;
 }
 
@@ -23,7 +38,7 @@
   display: inline-block;
   width: 49%;
   height: 100%;
-  background-color: black;
+  background-color: $grey;
   border-radius: $border-radius;
 }
 
@@ -54,17 +69,17 @@
 }
 
 .circle_half_quarter_btn--green {
-  @include circle_half_quarter_btn(5%, 100% 0 0 0, green);
+  @include circle_half_quarter_btn(5%, 100% 0 0 0, $green-not-active);
 }
 
 .circle_half_quarter_btn--red {
-  @include circle_half_quarter_btn(3%, 0 100% 0 0, red);
+  @include circle_half_quarter_btn(3%, 0 100% 0 0, $red-not-active);
 }
 
 .circle_half_quarter_btn--yellow {
-  @include circle_half_quarter_btn(5%, 0 0 0 100%, yellow);
+  @include circle_half_quarter_btn(5%, 0 0 0 100%, $yellow-not-active);
 }
 
 .circle_half_quarter_btn--blue {
-  @include circle_half_quarter_btn(3%, 0 0 100% 0, blue);
+  @include circle_half_quarter_btn(3%, 0 0 100% 0, $blue-not-active);
 }
