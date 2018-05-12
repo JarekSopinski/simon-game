@@ -14,6 +14,7 @@ $orange: #ED9017;
 $yellow-light: #F6E6B4;
 $black: #1B1B1E;
 $white: #E5E5E5;
+$grey: #46494C;
 
 // FONTS:
 
@@ -147,4 +148,42 @@ $open-sans-for-controls: 'Open Sans Condensed', sans-serif;
 
 .controls_section_reg {
   @include text($black-han-for-logo, 20px, $black)
+}
+
+.controls_section_item {
+  margin: 0 15px;
+}
+
+.controls_section_item_counter {
+  display: flex;
+  justify-content: flex-end;
+  width: 80px;
+  height: 40px;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  background-color: $grey;
+  border: 5px solid $black;
+  border-radius: 10%;
+  box-sizing: border-box;
+}
+
+.counter_digit {
+  @include text($orbitron-for-digits, 25px, $white)
+}
+
+.controls_section_item_btn {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 5px;
+  background-color: red;
+  border: 5px solid $black;
+  border-radius: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.controls_section_item_text {
+  display: block;
+  @include text($open-sans-for-controls, 20px, $black)
 }

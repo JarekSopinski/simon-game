@@ -136,4 +136,43 @@
   color: #1B1B1E;
   text-align: center; }
 
+.controls_section_item {
+  margin: 0 15px; }
+
+.controls_section_item_counter {
+  display: flex;
+  justify-content: flex-end;
+  width: 80px;
+  height: 40px;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  background-color: #46494C;
+  border: 5px solid #1B1B1E;
+  border-radius: 10%;
+  box-sizing: border-box; }
+
+.counter_digit {
+  font-family: "Orbitron", sans-serif;
+  font-size: 25px;
+  color: #E5E5E5;
+  text-align: center; }
+
+.controls_section_item_btn {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 5px;
+  background-color: red;
+  border: 5px solid #1B1B1E;
+  border-radius: 100%;
+  box-sizing: border-box;
+  cursor: pointer; }
+
+.controls_section_item_text {
+  display: block;
+  font-family: "Open Sans Condensed", sans-serif;
+  font-size: 20px;
+  color: #1B1B1E;
+  text-align: center; }
+
 /*# sourceMappingURL=style.css.map */
