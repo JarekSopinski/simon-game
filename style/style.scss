@@ -1,3 +1,5 @@
+// This stylesheet is written according to BEM convention.
+
 // COLORS:
 
 $green-active: #7FB800;
@@ -10,7 +12,8 @@ $blue-active: #00A6ED;
 $blue-not-active: #006BA6;
 $orange: rgba(237,144,23,1);
 $yellow-light: rgba(246,230,180,1);
-$grey: #1B1B1E;
+$black: #1B1B1E;
+$white: #E5E5E5;
 
 .body {
   display: flex;
@@ -21,10 +24,11 @@ $grey: #1B1B1E;
 }
 
 .circle {
+  position: relative;
   display: block;
   width: 600px;
   height: 600px;
-  background-color: $grey;
+  background-color: $black;
   border-radius: 100%;
 }
 
@@ -38,7 +42,7 @@ $grey: #1B1B1E;
   display: inline-block;
   width: 49%;
   height: 100%;
-  background-color: $grey;
+  background-color: $black;
   border-radius: $border-radius;
 }
 
@@ -66,6 +70,7 @@ $grey: #1B1B1E;
   height: 95%;
   background-color: $color;
   border-radius: $border-radius;
+  cursor: pointer;
 }
 
 .circle_half_quarter_btn--green {
@@ -82,4 +87,22 @@ $grey: #1B1B1E;
 
 .circle_half_quarter_btn--blue {
   @include circle_half_quarter_btn(3%, 0 0 100% 0, $blue-not-active);
+}
+
+.circle_center {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 45%;;
+  height: 45%;
+  padding: 2.5%;
+  background-color: $black;
+  border-radius: 100%;
+}
+
+.circle_center_controls {
+  width: 100%;
+  height: 100%;
+  background-color: $white;
+  border-radius: 100%;
 }
