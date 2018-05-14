@@ -28,16 +28,23 @@ const initialState = {
 
 const steps = ["green", "red", "yellow", "blue"];
 
-const colors = {
-    greenActive: "#7FB800",
-    greenNotActive: "#248232",
-    redActive: "#EF233C",
-    redNotActive: "#D90429",
-    yellowActive: "#F5CB5C",
-    yellowNotActive: "#FFB400",
-    blueActive: "#00A6ED",
-    blueNotActive: "#006BA6",
+const initialColors = {
+
+    green: "#248232",
+    red: "#D90429",
+    yellow: "#FFB400",
+    blue: "#006BA6",
     black: "#1B1B1E"
+
+};
+
+const activeColors = {
+
+    green: "#7FB800",
+    red: "#EF233C",
+    yellow: "#F5CB5C",
+    blue: "#00A6ED"
+
 };
 
 const stepsToWin = 20;
@@ -53,11 +60,11 @@ const noPowerMessage = "There is no power. Turn on power first!";
 
 const executeComputerTurn = () => {
 
-    addNewStep()
-    
-};
+    state.turn = "computer";
+    addNewStep();
+    state.computerSteps.forEach(step => displayStep(step))
 
-const executePlayerTurn = () => {};
+};
 
 const addNewStep = () => {
 
@@ -65,6 +72,25 @@ const addNewStep = () => {
     state.computerSteps.push(randomStep)
 
 };
+
+const displayStep = (step) => {
+
+
+
+};
+
+const startDisplayingStep = (step) => {
+
+    //$stepButtons[step]
+
+};
+
+const endDisplayingStep = (step) => {
+
+
+};
+
+const executePlayerTurn = () => {};
 
 
 //********* HELPER FUNCTIONS *********//
@@ -86,16 +112,16 @@ const togglePower = () => {
 
         case false:
             state.isPowerOn = true;
-            $btnPowerOff.css("background-color", colors.black);
-            $btnPowerOn.css("background-color", colors.blueNotActive);
+            $btnPowerOff.css("background-color", initialColors.black);
+            $btnPowerOn.css("background-color", initialColors.blue);
             $counterValue.text(initialCounterText);
             break;
 
         case true:
             setInitialState();
-            $btnPowerOff.css("background-color", colors.blueNotActive);
-            $btnPowerOn.css("background-color", colors.black);
-            $strictDiode.css("background-color", colors.black);
+            $btnPowerOff.css("background-color", initialColors.blue);
+            $btnPowerOn.css("background-color", initialColors.black);
+            $strictDiode.css("background-color", initialColors.black);
             $counterValue.empty();
 
     }
@@ -110,12 +136,12 @@ const toggleStrictMode = () => {
 
             case false:
                 state.isStrictModeOn = true;
-                $strictDiode.css("background-color", colors.redNotActive);
+                $strictDiode.css("background-color", initialColors.red);
                 break;
 
             case true:
                 state.isStrictModeOn = false;
-                $strictDiode.css("background-color", colors.black)
+                $strictDiode.css("background-color", initialColors.black)
 
         }
 
