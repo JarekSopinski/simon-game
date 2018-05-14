@@ -6,6 +6,7 @@ const $counterValue = $("#counterValue");
 const $btnStart = $("#btnStart");
 const $btnStrict = $("#btnStrict");
 const $strictDiode = $("#strictDiode");
+const $btnTogglePower = $("#btnTogglePower");
 const $btnPowerOff = $("#btnPowerOff");
 const $btnPowerOn = $("#btnPowerOn");
 
@@ -30,7 +31,8 @@ const colors = {
     yellowActive: "#F5CB5C",
     yellowNotActive: "#FFB400",
     blueActive: "#00A6ED",
-    blueNotActive: "#006BA6"
+    blueNotActive: "#006BA6",
+    black: "#1B1B1E"
 };
 
 const stepsToWin = 20;
@@ -38,3 +40,34 @@ const exampleTime = 2000;
 
 const initialCounterText = "--";
 const errorCounterText = "!!";
+
+const setInitialState = () => state = $.extend(true, {}, initialState);
+
+const togglePower = () => {
+
+    switch (state.isPowerOn) {
+
+        case false:
+            state.isPowerOn = true;
+            $btnPowerOff.css("background-color", colors.black);
+            $btnPowerOn.css("background-color", colors.blueNotActive);
+            $counterValue.text(initialCounterText);
+            break;
+
+        case true:
+            setInitialState();
+            $btnPowerOff.css("background-color", colors.blueNotActive);
+            $btnPowerOn.css("background-color", colors.black);
+            $counterValue.empty();
+
+    }
+
+};
+
+$(document).ready(() => {
+
+    setInitialState();
+
+    $btnTogglePower.on("click", togglePower);
+
+});

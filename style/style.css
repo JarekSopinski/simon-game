@@ -198,22 +198,21 @@
   width: 40px;
   padding: 5px;
   background-color: #1B1B1E;
-  border-radius: 5px; }
+  border-radius: 5px;
+  cursor: pointer; }
 
 .power_btn--off {
   display: inline-block;
   height: 100%;
   width: 45%;
   background-color: #006BA6;
-  border-radius: 5px;
-  cursor: pointer; }
+  border-radius: 5px; }
 
 .power_btn--on {
   display: inline-block;
   height: 100%;
   width: 45%;
   background-color: #1B1B1E;
-  border-radius: 5px;
-  cursor: pointer; }
+  border-radius: 5px; }
 
 /*# sourceMappingURL=style.css.map */

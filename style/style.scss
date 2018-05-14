@@ -212,6 +212,7 @@ $open-sans-for-controls: 'Open Sans Condensed', sans-serif;
   padding: 5px;
   background-color: $black;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 @mixin power-btn ($background-color) {
@@ -224,11 +225,9 @@ $open-sans-for-controls: 'Open Sans Condensed', sans-serif;
 
 .power_btn--off {
   @include power-btn($blue-not-active);
-  cursor: pointer;
 }
 
 .power_btn--on {
   @include power-btn($black);
-  cursor: pointer;
 }
 
