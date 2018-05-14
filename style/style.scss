@@ -168,7 +168,7 @@ $open-sans-for-controls: 'Open Sans Condensed', sans-serif;
   box-sizing: border-box;
 }
 
-.counter_digit {
+.counter_value {
   @include text($orbitron-for-digits, 25px, $white)
 }
 
