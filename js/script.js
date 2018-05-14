@@ -50,17 +50,23 @@ const activeColors = {
 const stepsToWin = 20;
 
 const initialCounterText = "--";
-const errorCounterText = "!!";
+const errorCounterText = "!!!";
 const noPowerMessage = "There is no power. Turn on power first!";
 
 
 //********* GAME MECHANICS *********//
 
 
-const executeComputerTurn = () => {
+const executeComputerTurn = (typeOfTurn) => {
 
     state.turn = "computer";
-    addNewStep();
+
+    if (typeOfTurn === "newTurn") {
+        addNewStep();
+        state.stepCounter++
+    }
+
+    $counterValue.text(state.stepCounter);
 
     for (let stepIndex = 0; stepIndex < state.computerSteps.length; stepIndex++) {
 
@@ -110,7 +116,11 @@ const executePlayerMove = (step) => {
     showStepClickedByPlayer(step);
     state.playerSteps.push(step);
 
+    const isMoveCorrect = compareArrays(state.computerSteps, state.playerSteps);
 
+    if (!isMoveCorrect) {
+        $counterValue.text(errorCounterText);
+        setTimeout(() => executeComputerTurn("repeat"), 2000) }
 
 };
 
@@ -132,8 +142,6 @@ const showStepClickedByPlayer = (step) => {
 
 
 const compareArrays = (array1, array2) => {
-
-    //TODO: modify to iteration through both arrays, comparing on each iteration
     return JSON.stringify(array1) === JSON.stringify(array2)
 };
 
@@ -191,8 +199,7 @@ const startGame = () => {
     if (state.isPowerOn && !state.isGameRunning) {
 
         state.isGameRunning = true;
-        $counterValue.text(state.stepCounter + 1);
-        executeComputerTurn()
+        executeComputerTurn("newTurn")
 
     } else if (!state.isPowerOn) { alert(noPowerMessage) }
 
