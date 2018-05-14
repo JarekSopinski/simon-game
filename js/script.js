@@ -62,7 +62,17 @@ const executeComputerTurn = () => {
 
     state.turn = "computer";
     addNewStep();
-    state.computerSteps.forEach(step => displayStep(step))
+    addNewStep();
+    addNewStep(); // TODO: 2nd and 3rd only for testing, remove it later
+
+    for (let i = 0; i < state.computerSteps.length; i++) {
+
+        const step = state.computerSteps[i];
+        const activeColor = activeColors[step];
+        $stepButtons[step].css("background-color", activeColor)
+
+    }
+
 
 };
 
@@ -73,23 +83,6 @@ const addNewStep = () => {
 
 };
 
-const displayStep = (step) => {
-
-
-
-};
-
-const startDisplayingStep = (step) => {
-
-    //$stepButtons[step]
-
-};
-
-const endDisplayingStep = (step) => {
-
-
-};
-
 const executePlayerTurn = () => {};
 
 
@@ -97,6 +90,8 @@ const executePlayerTurn = () => {};
 
 
 const compareArrays = (array1, array2) => {
+
+    //TODO: modify to iteration through both arrays, comparing on each iteration
     return JSON.stringify(array1) === JSON.stringify(array2)
 };
 
