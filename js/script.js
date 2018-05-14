@@ -6,7 +6,6 @@ const $counterValue = $("#counterValue");
 const $btnStart = $("#btnStart");
 const $btnStrict = $("#btnStrict");
 const $strictDiode = $("#strictDiode");
-const $btnOff = $("#btnOff");
-const $btnOn = $("#btnOn");
-
+const $btnPowerOff = $("#btnPowerOff");
+const $btnPowerOn = $("#btnPowerOn");
 
