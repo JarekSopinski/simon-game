@@ -23,7 +23,7 @@ const initialState = {
     stepCounter: 0,
     computerSteps: [],
     playerSteps: [],
-    playerTimeLimit: 5000 // increased by 1000 or 2000 every step
+    playerTimeLimit: 5
 };
 
 const steps = ["green", "red", "yellow", "blue"];
@@ -48,6 +48,7 @@ const activeColors = {
 };
 
 const stepsToWin = 20;
+let checkAtTimeLimit; // saves checkIfPlayerIsCorrect timeout
 
 const initialCounterText = "--";
 const errorCounterText = "!!!";
@@ -105,22 +106,29 @@ const endShowingStep = (stepIndex) => {
     $stepButtons[step].css("background-color", initialColor);
 
     if (stepIndex === (state.computerSteps.length - 1)) {
-        console.log("computer ends");
-        state.turn = "player"
+        startPlayerTurn()
     }
+
+};
+
+const startPlayerTurn = () => {
+
+    console.log("playerTurnStarts");
+    state.turn = "player";
+    state.playerSteps = []; // has to be cleared for next turn!
+    state.playerTimeLimit += 2; // time limit rises along with number of steps, 2 sec. for each new step
+
+    // player has to repeat all steps in a limited time:
+    checkAtTimeLimit = setTimeout(checkIfPlayerIsCorrect, 1000 * state.playerTimeLimit)
+
 
 };
 
 const executePlayerMove = (step) => {
 
-    showStepClickedByPlayer(step);
     state.playerSteps.push(step);
-
-    const isMoveCorrect = compareArrays(state.computerSteps, state.playerSteps);
-
-    if (!isMoveCorrect) {
-        $counterValue.text(errorCounterText);
-        setTimeout(() => executeComputerTurn("repeat"), 2000) }
+    showStepClickedByPlayer(step);
+    checkIfPlayerIsCorrect()
 
 };
 
@@ -134,6 +142,31 @@ const showStepClickedByPlayer = (step) => {
     setTimeout(() => {
         $stepButtons[step].css("background-color", initialColor)
     }, 500)
+
+};
+
+const checkIfPlayerIsCorrect = () => {
+
+    // runs after every player's click and after time limit has expired
+
+    const isPlayerCorrect = compareArrays(state.computerSteps, state.playerSteps);
+    let hasPlayerRepeatedAllSteps;
+
+    state.playerSteps.length === state.computerSteps.length ?
+        hasPlayerRepeatedAllSteps = true
+        :
+        hasPlayerRepeatedAllSteps = false;
+
+    if (!isPlayerCorrect) {
+        $counterValue.text(errorCounterText);
+        clearTimeout(checkAtTimeLimit);
+        setTimeout(() => executeComputerTurn("repeat"), 2000) }
+
+    else if (isPlayerCorrect && hasPlayerRepeatedAllSteps) {
+        console.log("correct!");
+        clearTimeout(checkAtTimeLimit);
+        setTimeout(() => executeComputerTurn("newTurn"), 2000)
+    }
 
 };
 
