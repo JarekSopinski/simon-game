@@ -21,7 +21,7 @@ const initialState = {
     isStrictModeOn: false,
     turn: null,
     stepCounter: 0,
-    computerSteps: ["green", "red", "yellow", "blue"], // TODO: values only for testing, restore [] later
+    computerSteps: [],
     playerSteps: [],
     playerTimeLimit: 5000 // increased by 1000 or 2000 every step
 };
@@ -63,7 +63,10 @@ const executeComputerTurn = () => {
     addNewStep();
 
     for (let stepIndex = 0; stepIndex < state.computerSteps.length; stepIndex++) {
-        setTimeout(() => startShowingStep(stepIndex), 2000 * (stepIndex + 1));
+
+        let delayMultiplier = stepIndex + 1;
+        setTimeout(() => startShowingStep(stepIndex), 2000 * delayMultiplier)
+
     }
 
 };
@@ -99,6 +102,28 @@ const endShowingStep = (stepIndex) => {
         console.log("computer ends");
         state.turn = "player"
     }
+
+};
+
+const executePlayerMove = (step) => {
+
+    showStepClickedByPlayer(step);
+    state.playerSteps.push(step);
+
+
+
+};
+
+const showStepClickedByPlayer = (step) => {
+
+    const activeColor = activeColors[step];
+    const initialColor = initialColors[step];
+
+    $stepButtons[step].css("background-color", activeColor);
+
+    setTimeout(() => {
+        $stepButtons[step].css("background-color", initialColor)
+    }, 500)
 
 };
 
@@ -173,12 +198,22 @@ const startGame = () => {
 
 };
 
+const handlePlayerClick = (step) => {
+
+    if (state.isGameRunning && state.turn === "player") {
+        executePlayerMove(step)
+    }
+
+};
+
 $(document).ready(() => {
 
     setInitialState();
 
     $btnTogglePower.on("click", togglePower);
     $btnStart.on("click", startGame);
-    $btnStrict.on("click", toggleStrictMode)
+    $btnStrict.on("click", toggleStrictMode);
+
+    steps.forEach(step => $stepButtons[step].on("click", () => handlePlayerClick(step)))
 
 });
