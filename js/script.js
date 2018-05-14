@@ -40,8 +40,29 @@ const exampleTime = 2000;
 
 const initialCounterText = "--";
 const errorCounterText = "!!";
+const noPowerMessage = "There is no power. Turn on power first!";
+
+
+//********* GAME MECHANICS *********//
+
+
+const exectueComputerTurn = () => {};
+
+const executePlayerTurn = () => {};
+
+
+//********* HELPER FUNCTIONS *********//
+
+
+const compareArrays = (array1, array2) => {
+    return JSON.stringify(array1) === JSON.stringify(array2)
+};
 
 const setInitialState = () => state = $.extend(true, {}, initialState);
+
+
+//********* EVENT HANDLERS *********//
+
 
 const togglePower = () => {
 
@@ -58,14 +79,44 @@ const togglePower = () => {
             setInitialState();
             $btnPowerOff.css("background-color", colors.blueNotActive);
             $btnPowerOn.css("background-color", colors.black);
+            $strictDiode.css("background-color", colors.black);
             $counterValue.empty();
 
     }
 
 };
 
-const compareArrays = (array1, array2) => {
-    return JSON.stringify(array1) === JSON.stringify(array2)
+const toggleStrictMode = () => {
+
+    if (state.isPowerOn) {
+
+        switch (state.isStrictModeOn) {
+
+            case false:
+                state.isStrictModeOn = true;
+                $strictDiode.css("background-color", colors.redNotActive);
+                break;
+
+            case true:
+                state.isStrictModeOn = false;
+                $strictDiode.css("background-color", colors.black)
+
+        }
+
+    } else { alert(noPowerMessage) }
+
+};
+
+const startGame = () => {
+
+    if (state.isPowerOn && !state.isGameRunning) {
+
+        state.isGameRunning = true;
+        $counterValue.text(state.step + 1);
+        exectueComputerTurn()
+
+    } else if (!state.isPowerOn) { alert(noPowerMessage) }
+
 };
 
 $(document).ready(() => {
@@ -73,5 +124,7 @@ $(document).ready(() => {
     setInitialState();
 
     $btnTogglePower.on("click", togglePower);
+    $btnStart.on("click", startGame);
+    $btnStrict.on("click", toggleStrictMode)
 
 });
