@@ -21,7 +21,7 @@ const initialState = {
     isStrictModeOn: false,
     turn: null,
     stepCounter: 0,
-    computerSteps: [],
+    computerSteps: ["green", "red", "yellow", "blue"], // TODO: values only for testing, restore [] later
     playerSteps: [],
     playerTimeLimit: 5000 // increased by 1000 or 2000 every step
 };
@@ -48,7 +48,6 @@ const activeColors = {
 };
 
 const stepsToWin = 20;
-const exampleTime = 2000;
 
 const initialCounterText = "--";
 const errorCounterText = "!!";
@@ -62,17 +61,10 @@ const executeComputerTurn = () => {
 
     state.turn = "computer";
     addNewStep();
-    addNewStep();
-    addNewStep(); // TODO: 2nd and 3rd only for testing, remove it later
 
-    for (let i = 0; i < state.computerSteps.length; i++) {
-
-        const step = state.computerSteps[i];
-        const activeColor = activeColors[step];
-        $stepButtons[step].css("background-color", activeColor)
-
+    for (let stepIndex = 0; stepIndex < state.computerSteps.length; stepIndex++) {
+        setTimeout(() => startShowingStep(stepIndex), 2000 * (stepIndex + 1));
     }
-
 
 };
 
@@ -83,7 +75,32 @@ const addNewStep = () => {
 
 };
 
-const executePlayerTurn = () => {};
+const startShowingStep = (stepIndex) => {
+
+    console.log("start: " + state.computerSteps[stepIndex]);
+
+    const step = state.computerSteps[stepIndex];
+    const activeColor = activeColors[step];
+    $stepButtons[step].css("background-color", activeColor);
+
+    setTimeout(() => endShowingStep(stepIndex), 1000)
+
+};
+
+const endShowingStep = (stepIndex) => {
+
+    console.log("end: " + state.computerSteps[stepIndex]);
+
+    const step = state.computerSteps[stepIndex];
+    const initialColor = initialColors[step];
+    $stepButtons[step].css("background-color", initialColor);
+
+    if (stepIndex === (state.computerSteps.length - 1)) {
+        console.log("computer ends");
+        state.turn = "player"
+    }
+
+};
 
 
 //********* HELPER FUNCTIONS *********//
