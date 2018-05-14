@@ -1,7 +1,10 @@
-const $btnGreen = $("#btnGreen");
-const $btnRed = $("#btnRed");
-const $btnYellow = $("#btnYellow");
-const $btnBlue = $("#btnBlue");
+const $stepButtons = {
+    green: $("#btnGreen"),
+    red: $("#btnRed"),
+    yellow: $("#btnYellow"),
+    blue: $("#btnBlue")
+};
+
 const $counterValue = $("#counterValue");
 const $btnStart = $("#btnStart");
 const $btnStrict = $("#btnStrict");
@@ -17,11 +20,13 @@ const initialState = {
     isGameRunning: false,
     isStrictModeOn: false,
     turn: null,
-    step: 0,
-    computerCombo: [],
-    playerCombo: [],
+    stepCounter: 0,
+    computerSteps: [],
+    playerSteps: [],
     playerTimeLimit: 5000 // increased by 1000 or 2000 every step
 };
+
+const steps = ["green", "red", "yellow", "blue"];
 
 const colors = {
     greenActive: "#7FB800",
@@ -46,9 +51,20 @@ const noPowerMessage = "There is no power. Turn on power first!";
 //********* GAME MECHANICS *********//
 
 
-const exectueComputerTurn = () => {};
+const executeComputerTurn = () => {
+
+    addNewStep()
+    
+};
 
 const executePlayerTurn = () => {};
+
+const addNewStep = () => {
+
+    const randomStep = steps[Math.floor(Math.random() * steps.length)];
+    state.computerSteps.push(randomStep)
+
+};
 
 
 //********* HELPER FUNCTIONS *********//
@@ -112,8 +128,8 @@ const startGame = () => {
     if (state.isPowerOn && !state.isGameRunning) {
 
         state.isGameRunning = true;
-        $counterValue.text(state.step + 1);
-        exectueComputerTurn()
+        $counterValue.text(state.stepCounter + 1);
+        executeComputerTurn()
 
     } else if (!state.isPowerOn) { alert(noPowerMessage) }
 
