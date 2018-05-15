@@ -1,8 +1,10 @@
 const $stepButtons = {
+
     green: $("#btnGreen"),
     red: $("#btnRed"),
     yellow: $("#btnYellow"),
     blue: $("#btnBlue")
+
 };
 
 const $counterValue = $("#counterValue");
@@ -45,6 +47,17 @@ const activeColors = {
     red: "#EF233C",
     yellow: "#F5CB5C",
     blue: "#00A6ED"
+
+};
+
+const sounds = {
+
+    green: document.getElementById("soundGreen"),
+    red: document.getElementById("soundRed"),
+    yellow: document.getElementById("soundYellow"),
+    blue: document.getElementById("soundBlue"),
+    error: document.getElementById("soundError")
+    // for some reason .play() doesn't work with jQuery selectors
 
 };
 
@@ -97,6 +110,9 @@ const startShowingStep = (stepIndex) => {
     const step = state.computerSteps[stepIndex];
     const activeColor = activeColors[step];
     $stepButtons[step].css("background-color", activeColor);
+
+    sounds[step].load();
+    sounds[step].play();
 
     timeoutForEndShowingStep = setTimeout(() => endShowingStep(stepIndex), 1000)
 
@@ -183,6 +199,9 @@ const compareSteps = () => {
 
 const handlePlayerMistake = () => {
 
+    sounds.error.load();
+    sounds.error.play();
+
     $counterValue.text(errorCounterText);
     clearTimeout(timeoutForPlayerTimeLimit);
     timeoutForStartOfComputerTurn = setTimeout(() => executeComputerTurn("repeat"), 2000)
@@ -206,6 +225,9 @@ const handlePlayerSuccess = () => {
 };
 
 const handlePlayerTimeLimitEnd = () => {
+
+    sounds.error.load();
+    sounds.error.play();
 
     $counterValue.text(errorCounterText);
     timeoutForStartOfComputerTurn = setTimeout(() => executeComputerTurn("repeat"), 2000)
@@ -303,6 +325,9 @@ const startGame = () => {
 };
 
 const handlePlayerClick = (step) => {
+
+    sounds[step].load();
+    sounds[step].play();
 
     if (state.isGameRunning && state.turn === "player") {
         executePlayerMove(step)
