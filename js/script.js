@@ -1,29 +1,3 @@
-const $stepButtons = {
-
-    green: $("#btnGreen"),
-    red: $("#btnRed"),
-    yellow: $("#btnYellow"),
-    blue: $("#btnBlue")
-
-};
-
-const $stepButtonsBGs = {
-
-    green: $("#btnGreenBG"),
-    red: $("#btnRedBG"),
-    yellow: $("#btnYellowBG"),
-    blue: $("#btnBlueBG")
-
-};
-
-const $counterValue = $("#counterValue");
-const $btnStart = $("#btnStart");
-const $btnStrict = $("#btnStrict");
-const $strictDiode = $("#strictDiode");
-const $btnTogglePower = $("#btnTogglePower");
-const $btnPowerOff = $("#btnPowerOff");
-const $btnPowerOn = $("#btnPowerOn");
-
 let state = {};
 
 const initialState = {
@@ -40,36 +14,6 @@ const initialState = {
 const steps = ["green", "red", "yellow", "blue"];
 const stepsToWin = 20;
 
-const initialColors = {
-
-    green: "#248232",
-    red: "#D90429",
-    yellow: "#FFB400",
-    blue: "#006BA6",
-    black: "#1B1B1E"
-
-};
-
-const activeColors = {
-
-    green: "#7FB800",
-    red: "#EF233C",
-    yellow: "#F5CB5C",
-    blue: "#00A6ED"
-
-};
-
-const sounds = {
-
-    green: document.getElementById("soundGreen"),
-    red: document.getElementById("soundRed"),
-    yellow: document.getElementById("soundYellow"),
-    blue: document.getElementById("soundBlue"),
-    error: document.getElementById("soundError")
-    // for some reason .play() doesn't work with jQuery selectors
-
-};
-
 let timeoutForPlayerTimeLimit;
 let timeoutForStartOfComputerTurn;
 let timeoutForStartShowingStep;
@@ -78,8 +22,54 @@ let timeoutForEndShowingStep;
 const initialCounterText = "--";
 const errorCounterText = "!!!";
 const correctCounterText = "OK";
-const gameOverCounterText = "WIN!";
+const gameOverCounterText = "WIN";
 const noPowerMessage = "There is no power. Turn on power first!";
+
+const initialColors = {
+    green: "#248232",
+    red: "#D90429",
+    yellow: "#FFB400",
+    blue: "#006BA6",
+    black: "#1B1B1E"
+};
+
+const activeColors = {
+    green: "#7FB800",
+    red: "#EF233C",
+    yellow: "#F5CB5C",
+    blue: "#00A6ED"
+};
+
+const $stepButtons = {
+    green: $("#btnGreen"),
+    red: $("#btnRed"),
+    yellow: $("#btnYellow"),
+    blue: $("#btnBlue")
+};
+
+const $stepButtonsBGs = {
+    green: $("#btnGreenBG"),
+    red: $("#btnRedBG"),
+    yellow: $("#btnYellowBG"),
+    blue: $("#btnBlueBG")
+};
+
+const $counterValue = $("#counterValue");
+const $btnStart = $("#btnStart");
+const $btnStrict = $("#btnStrict");
+const $strictDiode = $("#strictDiode");
+const $btnTogglePower = $("#btnTogglePower");
+const $btnPowerOff = $("#btnPowerOff");
+const $btnPowerOn = $("#btnPowerOn");
+
+const sounds = {
+    green: document.getElementById("soundGreen"),
+    red: document.getElementById("soundRed"),
+    yellow: document.getElementById("soundYellow"),
+    blue: document.getElementById("soundBlue"),
+    error: document.getElementById("soundError")
+    // for some reason .play() doesn't work with jQuery selectors
+};
 
 
 //********* COMPUTER'S TURN *********//
@@ -114,8 +104,6 @@ const addNewStep = () => {
 
 const startShowingStep = (stepIndex) => {
 
-    console.log("start: " + state.computerSteps[stepIndex]);
-
     const step = state.computerSteps[stepIndex];
     const activeColor = activeColors[step];
     $stepButtonsBGs[step].css("background-color", activeColor);
@@ -128,8 +116,6 @@ const startShowingStep = (stepIndex) => {
 };
 
 const endShowingStep = (stepIndex) => {
-
-    console.log("end: " + state.computerSteps[stepIndex]);
 
     const step = state.computerSteps[stepIndex];
     const initialColor = initialColors[step];
@@ -147,11 +133,9 @@ const endShowingStep = (stepIndex) => {
 
 const startPlayerTurn = () => {
 
-    console.log("playerTurnStarts");
     state.turn = "player";
     state.playerSteps = []; // has to be cleared for next turn!
 
-    // player has to repeat all steps in a limited time:
     timeoutForPlayerTimeLimit = setTimeout(handlePlayerTimeLimitEnd, 1000 * state.playerTimeLimit)
 
 
@@ -222,8 +206,6 @@ const handlePlayerMistake = () => {
 };
 
 const handlePlayerSuccess = () => {
-
-    console.log("correct!");
 
     $counterValue.text(correctCounterText);
     clearTimeout(timeoutForPlayerTimeLimit);
