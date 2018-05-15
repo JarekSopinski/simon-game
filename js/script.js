@@ -27,7 +27,7 @@ const initialState = {
 };
 
 const steps = ["green", "red", "yellow", "blue"];
-const stepsToWin = 5;
+const stepsToWin = 20;
 
 const initialColors = {
 
