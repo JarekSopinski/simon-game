@@ -149,7 +149,7 @@ const checkIfPlayerIsCorrect = () => {
 
     // runs after every player's click and after time limit has expired
 
-    const isPlayerCorrect = compareArrays(state.computerSteps, state.playerSteps);
+    const isPlayerCorrect = compareSteps();
     let hasPlayerRepeatedAllSteps;
 
     state.playerSteps.length === state.computerSteps.length ?
@@ -170,12 +170,15 @@ const checkIfPlayerIsCorrect = () => {
 
 };
 
+const compareSteps = () => {
 
-//********* HELPER FUNCTIONS *********//
+    const computerSteps = state.computerSteps;
+    const playerSteps = state.playerSteps;
 
+    const computerStepsUpToPlayerLastStep = computerSteps.slice(0, playerSteps.length);
 
-const compareArrays = (array1, array2) => {
-    return JSON.stringify(array1) === JSON.stringify(array2)
+    return JSON.stringify(computerStepsUpToPlayerLastStep) === JSON.stringify(playerSteps)
+
 };
 
 const setInitialState = () => state = $.extend(true, {}, initialState);
