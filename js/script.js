@@ -7,6 +7,15 @@ const $stepButtons = {
 
 };
 
+const $stepButtonsBGs = {
+
+    green: $("#btnGreenBG"),
+    red: $("#btnRedBG"),
+    yellow: $("#btnYellowBG"),
+    blue: $("#btnBlueBG")
+
+};
+
 const $counterValue = $("#counterValue");
 const $btnStart = $("#btnStart");
 const $btnStrict = $("#btnStrict");
@@ -109,7 +118,7 @@ const startShowingStep = (stepIndex) => {
 
     const step = state.computerSteps[stepIndex];
     const activeColor = activeColors[step];
-    $stepButtons[step].css("background-color", activeColor);
+    $stepButtonsBGs[step].css("background-color", activeColor);
 
     sounds[step].load();
     sounds[step].play();
@@ -124,7 +133,7 @@ const endShowingStep = (stepIndex) => {
 
     const step = state.computerSteps[stepIndex];
     const initialColor = initialColors[step];
-    $stepButtons[step].css("background-color", initialColor);
+    $stepButtonsBGs[step].css("background-color", initialColor);
 
     if (stepIndex === (state.computerSteps.length - 1)) {
         startPlayerTurn()
@@ -161,10 +170,10 @@ const showStepClickedByPlayer = (step) => {
     const activeColor = activeColors[step];
     const initialColor = initialColors[step];
 
-    $stepButtons[step].css("background-color", activeColor);
+    $stepButtonsBGs[step].css("background-color", activeColor);
 
     setTimeout(() => {
-        $stepButtons[step].css("background-color", initialColor)
+        $stepButtonsBGs[step].css("background-color", initialColor)
     }, 500)
 
 };
@@ -338,11 +347,13 @@ const startGame = () => {
 
 const handlePlayerClick = (step) => {
 
-    sounds[step].load();
-    sounds[step].play();
-
     if (state.isGameRunning && state.turn === "player") {
+
+        sounds[step].load();
+        sounds[step].play();
+
         executePlayerMove(step)
+
     }
 
 };
