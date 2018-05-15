@@ -48,14 +48,18 @@ const activeColors = {
 };
 
 const stepsToWin = 20;
-let checkAtTimeLimit; // saves checkIfPlayerIsCorrect timeout
+
+let timeoutForPlayerTimeLimit;
+let timeoutForStartOfComputerTurn;
+let timeoutForStartShowingStep;
+let timeoutForEndShowingStep;
 
 const initialCounterText = "--";
 const errorCounterText = "!!!";
 const noPowerMessage = "There is no power. Turn on power first!";
 
 
-//********* GAME MECHANICS *********//
+//********* COMPUTER'S TURN *********//
 
 
 const executeComputerTurn = (typeOfTurn) => {
@@ -72,7 +76,7 @@ const executeComputerTurn = (typeOfTurn) => {
     for (let stepIndex = 0; stepIndex < state.computerSteps.length; stepIndex++) {
 
         let delayMultiplier = stepIndex + 1;
-        setTimeout(() => startShowingStep(stepIndex), 2000 * delayMultiplier)
+        timeoutForStartShowingStep = setTimeout(() => startShowingStep(stepIndex), 2000 * delayMultiplier)
 
     }
 
@@ -93,7 +97,7 @@ const startShowingStep = (stepIndex) => {
     const activeColor = activeColors[step];
     $stepButtons[step].css("background-color", activeColor);
 
-    setTimeout(() => endShowingStep(stepIndex), 1000)
+    timeoutForEndShowingStep = setTimeout(() => endShowingStep(stepIndex), 1000)
 
 };
 
@@ -111,15 +115,18 @@ const endShowingStep = (stepIndex) => {
 
 };
 
+
+//********* PLAYER'S TURN *********//
+
+
 const startPlayerTurn = () => {
 
     console.log("playerTurnStarts");
     state.turn = "player";
     state.playerSteps = []; // has to be cleared for next turn!
-    state.playerTimeLimit += 2; // time limit rises along with number of steps, 2 sec. for each new step
 
     // player has to repeat all steps in a limited time:
-    checkAtTimeLimit = setTimeout(checkIfPlayerIsCorrect, 1000 * state.playerTimeLimit)
+    timeoutForPlayerTimeLimit = setTimeout(handlePlayerTimeLimitEnd, 1000 * state.playerTimeLimit)
 
 
 };
@@ -157,16 +164,8 @@ const checkIfPlayerIsCorrect = () => {
         :
         hasPlayerRepeatedAllSteps = false;
 
-    if (!isPlayerCorrect) {
-        $counterValue.text(errorCounterText);
-        clearTimeout(checkAtTimeLimit);
-        setTimeout(() => executeComputerTurn("repeat"), 2000) }
-
-    else if (isPlayerCorrect && hasPlayerRepeatedAllSteps) {
-        console.log("correct!");
-        clearTimeout(checkAtTimeLimit);
-        setTimeout(() => executeComputerTurn("newTurn"), 2000)
-    }
+    if (!isPlayerCorrect) { handlePlayerMistake() }
+    else if (isPlayerCorrect && hasPlayerRepeatedAllSteps) { handlePlayerSuccess() }
 
 };
 
@@ -181,10 +180,47 @@ const compareSteps = () => {
 
 };
 
+const handlePlayerMistake = () => {
+
+    $counterValue.text(errorCounterText);
+    clearTimeout(timeoutForPlayerTimeLimit);
+    timeoutForStartOfComputerTurn = setTimeout(() => executeComputerTurn("repeat"), 2000)
+
+};
+
+const handlePlayerSuccess = () => {
+
+    console.log("correct!");
+    clearTimeout(timeoutForPlayerTimeLimit);
+    state.playerTimeLimit += 2; // time limit rises along with number of steps, 2 sec. for each new step
+    timeoutForStartOfComputerTurn = setTimeout(() => executeComputerTurn("newTurn"), 2000)
+
+};
+
+const handlePlayerTimeLimitEnd = () => {
+
+    $counterValue.text(errorCounterText);
+    timeoutForStartOfComputerTurn = setTimeout(() => executeComputerTurn("repeat"), 2000)
+
+};
+
+
+//********* MISC. FUNCTIONS *********//
+
+
+const clearAllTimeouts = () => {
+
+    clearTimeout(timeoutForStartShowingStep);
+    clearTimeout(timeoutForEndShowingStep);
+    clearTimeout(timeoutForPlayerTimeLimit);
+    clearTimeout(timeoutForStartOfComputerTurn)
+
+};
+
 const setInitialState = () => state = $.extend(true, {}, initialState);
 
 
-//********* EVENT HANDLERS *********//
+//********* EVENT HANDLERS & LISTENERS *********//
 
 
 const togglePower = () => {
@@ -199,6 +235,7 @@ const togglePower = () => {
             break;
 
         case true:
+            clearAllTimeouts();
             setInitialState();
             $btnPowerOff.css("background-color", initialColors.blue);
             $btnPowerOn.css("background-color", initialColors.black);
