@@ -27,6 +27,7 @@ const initialState = {
 };
 
 const steps = ["green", "red", "yellow", "blue"];
+const stepsToWin = 5;
 
 const initialColors = {
 
@@ -47,8 +48,6 @@ const activeColors = {
 
 };
 
-const stepsToWin = 20;
-
 let timeoutForPlayerTimeLimit;
 let timeoutForStartOfComputerTurn;
 let timeoutForStartShowingStep;
@@ -56,6 +55,8 @@ let timeoutForEndShowingStep;
 
 const initialCounterText = "--";
 const errorCounterText = "!!!";
+const correctCounterText = "OK";
+const gameOverCounterText = "WIN!";
 const noPowerMessage = "There is no power. Turn on power first!";
 
 
@@ -191,9 +192,16 @@ const handlePlayerMistake = () => {
 const handlePlayerSuccess = () => {
 
     console.log("correct!");
+
+    $counterValue.text(correctCounterText);
     clearTimeout(timeoutForPlayerTimeLimit);
-    state.playerTimeLimit += 2; // time limit rises along with number of steps, 2 sec. for each new step
-    timeoutForStartOfComputerTurn = setTimeout(() => executeComputerTurn("newTurn"), 2000)
+
+    if (state.stepCounter < stepsToWin) {
+
+        state.playerTimeLimit += 2; // time limit rises along with number of steps, 2 sec. for each new step
+        timeoutForStartOfComputerTurn = setTimeout(() => executeComputerTurn("newTurn"), 2000)
+
+    } else { handleGameOverAndRestart() }
 
 };
 
@@ -206,6 +214,22 @@ const handlePlayerTimeLimitEnd = () => {
 
 
 //********* MISC. FUNCTIONS *********//
+
+const handleGameOverAndRestart = () => {
+
+    const wasLastGameStrict = state.isStrictModeOn;
+
+    $counterValue.text(gameOverCounterText);
+    clearAllTimeouts();
+    setInitialState();
+
+    state.isPowerOn = true;
+    state.isGameRunning = true;
+    state.isStrictModeOn = wasLastGameStrict;
+
+    timeoutForStartOfComputerTurn = setTimeout(() => executeComputerTurn("newTurn"), 2000)
+
+};
 
 
 const clearAllTimeouts = () => {
