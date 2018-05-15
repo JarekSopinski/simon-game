@@ -41,8 +41,8 @@ $open-sans-for-controls: 'Open Sans Condensed', sans-serif;
 .circle {
   position: relative;
   display: block;
-  width: 600px;
-  height: 600px;
+  width: 300px;
+  height: 300px;
   background-color: $black;
   border-radius: 100%;
 }
@@ -135,33 +135,35 @@ $open-sans-for-controls: 'Open Sans Condensed', sans-serif;
 }
 
 .circle_center_controls_section--middle {
-  @include circle_center_controls_section(flex-end)
+  @include circle_center_controls_section(flex-end);
+  margin-top: 10px;
 }
 
 .circle_center_controls_section--bottom {
-  @include circle_center_controls_section(center)
+  @include circle_center_controls_section(flex-start);
+  margin-top: 5px;
 }
 
 .controls_section_title {
-  @include text($black-han-for-logo, 50px, $black);
+  @include text($black-han-for-logo, 25px, $black);
   display: inline;
 }
 
 .controls_section_reg {
-  @include text($black-han-for-logo, 20px, $black)
+  @include text($black-han-for-logo, 15px, $black)
 }
 
 .controls_section_item {
-  margin: 0 15px;
+  margin: 0 5px;
 }
 
 .controls_section_item_counter {
   display: flex;
   justify-content: flex-end;
-  width: 80px;
-  height: 40px;
+  width: 45px;
+  height: 25px;
   margin-bottom: 5px;
-  padding: 5px 10px;
+  padding: 5px;
   background-color: $grey;
   border: 5px solid $black;
   border-radius: 10%;
@@ -169,16 +171,16 @@ $open-sans-for-controls: 'Open Sans Condensed', sans-serif;
 }
 
 .counter_value {
-  @include text($orbitron-for-digits, 25px, $white)
+  @include text($orbitron-for-digits, 10px, $white)
 }
 
 .controls_section_item_btn {
   display: block;
-  width: 40px;
-  height: 40px;
+  width: 25px;
+  height: 25px;
   margin-bottom: 5px;
   background-color: $yellow-controls;
-  border: 5px solid $black;
+  border: 3px solid $black;
   border-radius: 100%;
   box-sizing: border-box;
   cursor: pointer;
@@ -186,8 +188,8 @@ $open-sans-for-controls: 'Open Sans Condensed', sans-serif;
 
 .controls_section_item_diode {
   display: block;
-  width: 13px;
-  height: 13px;
+  width: 8px;
+  height: 8px;
   margin: 0 auto 5px auto;
   background-color: $black;
   border-radius: 100%;
@@ -195,20 +197,20 @@ $open-sans-for-controls: 'Open Sans Condensed', sans-serif;
 
 .controls_section_item_text {
   display: block;
-  @include text($open-sans-for-controls, 20px, $black);
+  @include text($open-sans-for-controls, 10px, $black);
   text-transform: uppercase;
 }
 
 .controls_section_power_text {
   display: inline;
-  @include text($open-sans-for-controls, 20px, $black);
+  @include text($open-sans-for-controls, 10px, $black);
   text-transform: uppercase;
 }
 
 .controls_section_power_btn {
   display: inline-block;
-  height: 20px;
-  width: 40px;
+  height: 13px;
+  width: 25px;
   padding: 5px;
   background-color: $black;
   border-radius: 5px;
@@ -218,7 +220,7 @@ $open-sans-for-controls: 'Open Sans Condensed', sans-serif;
 @mixin power-btn ($background-color) {
   display: inline-block;
   height: 100%;
-  width: 45%;
+  width: 40%;
   background-color: $background-color;
   border-radius: 5px;
 }
@@ -229,5 +231,74 @@ $open-sans-for-controls: 'Open Sans Condensed', sans-serif;
 
 .power_btn--on {
   @include power-btn($black);
+}
+
+// TABLET & DESKTOP RES
+
+@media screen and (min-width: 600px) {
+
+  .circle {
+    width: 600px;
+    height: 600px;
+  }
+
+  .circle_center_controls_section--bottom {
+    @include circle_center_controls_section(center);
+    margin-top: 0;
+  }
+
+  .circle_center_controls_section--middle {
+    margin-top: 0;
+  }
+
+  .controls_section_title {
+    font-size: 50px;
+  }
+
+  .controls_section_reg {
+    font-size: 20px;
+  }
+
+  .controls_section_item {
+    margin: 0 15px;
+  }
+
+  .controls_section_item_counter {
+    width: 80px;
+    height: 40px;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    border-width: 5px;
+  }
+
+  .counter_value {
+    font-size: 25px;
+  }
+
+  .controls_section_item_btn {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 5px;
+  }
+
+  .controls_section_item_diode {
+    width: 13px;
+    height: 13px;
+    margin: 0 auto 5px auto;
+  }
+
+  .controls_section_item_text {
+    font-size: 20px;
+  }
+
+  .controls_section_power_text {
+    font-size: 20px;
+  }
+
+  .controls_section_power_btn {
+    height: 20px;
+    width: 40px;
+  }
+
 }
 

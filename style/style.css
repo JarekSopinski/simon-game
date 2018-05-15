@@ -8,8 +8,8 @@
 .circle {
   position: relative;
   display: block;
-  width: 600px;
-  height: 600px;
+  width: 300px;
+  height: 300px;
   background-color: #1B1B1E;
   border-radius: 100%; }
 
@@ -114,38 +114,40 @@
   align-items: flex-end;
   justify-content: center;
   width: 100%;
-  height: 33%; }
+  height: 33%;
+  margin-top: 10px; }
 
 .circle_center_controls_section--bottom {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   width: 100%;
-  height: 33%; }
+  height: 33%;
+  margin-top: 5px; }
 
 .controls_section_title {
   font-family: "Black Han Sans", sans-serif;
-  font-size: 50px;
+  font-size: 25px;
   color: #1B1B1E;
   text-align: center;
   display: inline; }
 
 .controls_section_reg {
   font-family: "Black Han Sans", sans-serif;
-  font-size: 20px;
+  font-size: 15px;
   color: #1B1B1E;
   text-align: center; }
 
 .controls_section_item {
-  margin: 0 15px; }
+  margin: 0 5px; }
 
 .controls_section_item_counter {
   display: flex;
   justify-content: flex-end;
-  width: 80px;
-  height: 40px;
+  width: 45px;
+  height: 25px;
   margin-bottom: 5px;
-  padding: 5px 10px;
+  padding: 5px;
   background-color: #46494C;
   border: 5px solid #1B1B1E;
   border-radius: 10%;
@@ -153,25 +155,25 @@
 
 .counter_value {
   font-family: "Orbitron", sans-serif;
-  font-size: 25px;
+  font-size: 10px;
   color: #E5E5E5;
   text-align: center; }
 
 .controls_section_item_btn {
   display: block;
-  width: 40px;
-  height: 40px;
+  width: 25px;
+  height: 25px;
   margin-bottom: 5px;
   background-color: #FCA311;
-  border: 5px solid #1B1B1E;
+  border: 3px solid #1B1B1E;
   border-radius: 100%;
   box-sizing: border-box;
   cursor: pointer; }
 
 .controls_section_item_diode {
   display: block;
-  width: 13px;
-  height: 13px;
+  width: 8px;
+  height: 8px;
   margin: 0 auto 5px auto;
   background-color: #1B1B1E;
   border-radius: 100%; }
@@ -179,7 +181,7 @@
 .controls_section_item_text {
   display: block;
   font-family: "Open Sans Condensed", sans-serif;
-  font-size: 20px;
+  font-size: 10px;
   color: #1B1B1E;
   text-align: center;
   text-transform: uppercase; }
@@ -187,15 +189,15 @@
 .controls_section_power_text {
   display: inline;
   font-family: "Open Sans Condensed", sans-serif;
-  font-size: 20px;
+  font-size: 10px;
   color: #1B1B1E;
   text-align: center;
   text-transform: uppercase; }
 
 .controls_section_power_btn {
   display: inline-block;
-  height: 20px;
-  width: 40px;
+  height: 13px;
+  width: 25px;
   padding: 5px;
   background-color: #1B1B1E;
   border-radius: 5px;
@@ -204,15 +206,70 @@
 .power_btn--off {
   display: inline-block;
   height: 100%;
-  width: 45%;
+  width: 40%;
   background-color: #006BA6;
   border-radius: 5px; }
 
 .power_btn--on {
   display: inline-block;
   height: 100%;
-  width: 45%;
+  width: 40%;
   background-color: #1B1B1E;
   border-radius: 5px; }
+
+@media screen and (min-width: 600px) {
+  .circle {
+    width: 600px;
+    height: 600px; }
+
+  .circle_center_controls_section--bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 33%;
+    margin-top: 0; }
+
+  .circle_center_controls_section--middle {
+    margin-top: 0; }
+
+  .controls_section_title {
+    font-size: 50px; }
+
+  .controls_section_reg {
+    font-size: 20px; }
+
+  .controls_section_item {
+    margin: 0 15px; }
+
+  .controls_section_item_counter {
+    width: 80px;
+    height: 40px;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    border-width: 5px; }
+
+  .counter_value {
+    font-size: 25px; }
+
+  .controls_section_item_btn {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 5px; }
+
+  .controls_section_item_diode {
+    width: 13px;
+    height: 13px;
+    margin: 0 auto 5px auto; }
+
+  .controls_section_item_text {
+    font-size: 20px; }
+
+  .controls_section_power_text {
+    font-size: 20px; }
+
+  .controls_section_power_btn {
+    height: 20px;
+    width: 40px; } }
 
 /*# sourceMappingURL=style.css.map */
