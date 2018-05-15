@@ -204,7 +204,11 @@ const handlePlayerMistake = () => {
 
     $counterValue.text(errorCounterText);
     clearTimeout(timeoutForPlayerTimeLimit);
-    timeoutForStartOfComputerTurn = setTimeout(() => executeComputerTurn("repeat"), 2000)
+
+    state.isStrictModeOn ?
+        handleGameOverAndRestart("strictFail")
+        :
+        timeoutForStartOfComputerTurn = setTimeout(() => executeComputerTurn("repeat"), 2000)
 
 };
 
@@ -220,7 +224,7 @@ const handlePlayerSuccess = () => {
         state.playerTimeLimit += 2; // time limit rises along with number of steps, 2 sec. for each new step
         timeoutForStartOfComputerTurn = setTimeout(() => executeComputerTurn("newTurn"), 2000)
 
-    } else { handleGameOverAndRestart() }
+    } else { handleGameOverAndRestart("win") }
 
 };
 
@@ -230,18 +234,26 @@ const handlePlayerTimeLimitEnd = () => {
     sounds.error.play();
 
     $counterValue.text(errorCounterText);
-    timeoutForStartOfComputerTurn = setTimeout(() => executeComputerTurn("repeat"), 2000)
+
+    state.isStrictModeOn ?
+        handleGameOverAndRestart("strictFail")
+        :
+        timeoutForStartOfComputerTurn = setTimeout(() => executeComputerTurn("repeat"), 2000)
 
 };
 
 
 //********* MISC. FUNCTIONS *********//
 
-const handleGameOverAndRestart = () => {
+const handleGameOverAndRestart = (typeOfRestart) => {
 
     const wasLastGameStrict = state.isStrictModeOn;
 
-    $counterValue.text(gameOverCounterText);
+    typeOfRestart === "win" ?
+        $counterValue.text(gameOverCounterText)
+        :
+        $counterValue.text(errorCounterText); // in case of strictFail
+
     clearAllTimeouts();
     setInitialState();
 
